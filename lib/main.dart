@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,12 +28,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  TextEditingController _controller;
+
   int _counter = 0;
 
   void _incrementCounter() {
     setState(() {
       _counter++;
+      print(_controller.text);
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void createDB(String text) {
+    print('Creating db "$text"');
   }
 
   @override
@@ -45,6 +65,19 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            TextField(
+              controller: _controller,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'DB Name',
+              ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                createDB(_controller.text);
+              },
+              child: Text('Create DB!!!'),
+            ),
             Text(
               'You have pushed the button this many times:',
             ),
