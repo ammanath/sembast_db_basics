@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _updateStatus(String status) {
     setState(() {
       _status = status;
-      print("Status is $status");
+      print("Status : $status");
     });
   }
 
