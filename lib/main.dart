@@ -31,11 +31,19 @@ class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _controller;
 
   int _counter = 0;
+  String _status = "Status:";
 
   void _incrementCounter() {
     setState(() {
       _counter++;
       print(_controller.text);
+    });
+  }
+
+  void _updateStatus(String status) {
+    setState(() {
+      _status = status;
+      print("Status is $status");
     });
   }
 
@@ -53,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void createDB(String text) {
     print('Creating db "$text"');
+    _updateStatus('In Create DB, creating "$text" ....');
   }
 
   @override
@@ -77,6 +86,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 createDB(_controller.text);
               },
               child: Text('Create DB!!!'),
+            ),
+            Text(
+              _status,
             ),
             Text(
               'You have pushed the button this many times:',
